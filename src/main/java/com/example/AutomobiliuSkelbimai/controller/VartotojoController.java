@@ -3,10 +3,7 @@ package com.example.AutomobiliuSkelbimai.controller;
 import com.example.AutomobiliuSkelbimai.carsRepositories.VartotojasRepository;
 import com.example.AutomobiliuSkelbimai.models.Vartotojas;
 import com.example.AutomobiliuSkelbimai.services.VartotojoService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 
@@ -16,7 +13,7 @@ public class VartotojoController {
     VartotojoService vartotojoService = new VartotojoService();
 
     @CrossOrigin
-    @GetMapping("/addVartotojas")
+    @PostMapping("/addVartotojas")
     public void addVartotojas(@RequestBody Vartotojas vartotojas) throws SQLException {
         vartotojoService.addVartotojas(vartotojas);
     }

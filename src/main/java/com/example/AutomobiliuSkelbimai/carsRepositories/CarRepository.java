@@ -6,10 +6,10 @@ import com.example.AutomobiliuSkelbimai.utils.Connect;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class carRepository {
+public class CarRepository {
 
     public void addCar(Car car) throws SQLException {
-        PreparedStatement ps = Connect.SQLConnection("INSER INTO cars (pavadinimas, marke, modelis, metai, " +
+        PreparedStatement ps = Connect.SQLConnection("INSERT INTO cars (pavadinimas, marke, modelis, metai, " +
                 "kaina, rida, aprasymas, nuotrauka) VALUES (?,?,?,?,?,?,?,?)");
         ps.setString(1, car.getPavadinimas());
         ps.setString(2, car.getMarke());
