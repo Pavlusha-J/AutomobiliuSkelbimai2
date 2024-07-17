@@ -19,5 +19,6 @@ public class carRepository {
         ps.setInt(6, car.getRida());
         ps.setString(7, car.getAprasymas());
         ps.setBytes(8, car.getNuotrauka());
+        ps.execute();
     }
 }

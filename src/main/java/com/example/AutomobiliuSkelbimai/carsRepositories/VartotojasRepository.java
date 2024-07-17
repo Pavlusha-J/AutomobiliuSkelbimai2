@@ -10,12 +10,11 @@ import java.sql.SQLException;
 public class VartotojasRepository {
 
     public void addVartotojas(Vartotojas vartotojas) throws SQLException {
-        PreparedStatement ps = Connect.SQLConnection("INSER INTO users (id, name, email, password) " +
-                "VALUES (?,?,?,?)");
-        ps.setInt(1, vartotojas.getId());
-        ps.setString(2, vartotojas.getName());
-        ps.setString(3, vartotojas.getEmail());
-        ps.setString(4, vartotojas.getPassword());
-
+        PreparedStatement ps = Connect.SQLConnection("INSERT INTO users (name, email, password) " +
+                "VALUES (?,?,?)");
+        ps.setString(1, vartotojas.getName());
+        ps.setString(2, vartotojas.getEmail());
+        ps.setString(3, vartotojas.getPassword());
+        ps.execute();
     }
-    }
+}
