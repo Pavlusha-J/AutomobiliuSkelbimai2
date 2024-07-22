@@ -32,11 +32,26 @@ public class CarController {
     }
     @CrossOrigin
     @GetMapping ("/getModelis")
-    public List<String>getModelisList() throws SQLException {
-        List<String> modelisList = carService.getModelisList();
+    public List<String>getModelisList(String marke) throws SQLException {
+        List<String> modelisList = carService.getModelisList(marke);
         return modelisList;
     }
-      }
+    @CrossOrigin
+    @GetMapping("/paieska")
+    public List<Car> getSearchList(String marke, String modelis, double kainaNuo, double kainaIki) throws SQLException {
+        return carService.getSearchList(marke, modelis, kainaNuo, kainaIki);
+    }
+    @CrossOrigin
+    @PostMapping("/modifyCar")
+    public void modifyCAr(@RequestBody Car car) throws SQLException {
+        carService.modifyCar(car);
+    }
+    @CrossOrigin
+    @GetMapping("/getCarById")
+    public Car getCarById(int id) throws SQLException {
+        return carService.getCarById(id);
+    }
+}
 
 
 

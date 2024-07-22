@@ -17,4 +17,9 @@ public class VartotojoController {
     public void addVartotojas(@RequestBody Vartotojas vartotojas) throws SQLException {
         vartotojoService.addVartotojas(vartotojas);
     }
+    @CrossOrigin
+    @GetMapping("/getToken")
+    public String getJwtToken(String email, String password) throws SQLException {
+        return vartotojoService.getJwtToken(email, password);
+    }
 }

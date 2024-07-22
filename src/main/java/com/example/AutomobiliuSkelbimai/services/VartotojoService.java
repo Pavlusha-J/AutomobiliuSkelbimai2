@@ -11,4 +11,7 @@ public class VartotojoService {
     public void addVartotojas(Vartotojas vartotojas) throws SQLException {
         vartotojasRepository.addVartotojas(vartotojas);
     }
+    public String getJwtToken(String email, String password) throws SQLException {
+        return vartotojasRepository.getJwtToken(email, password);
+    }
 }
