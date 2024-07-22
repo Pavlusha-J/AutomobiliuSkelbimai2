@@ -1,6 +1,7 @@
 package com.example.AutomobiliuSkelbimai.controller;
 
 import com.example.AutomobiliuSkelbimai.carsRepositories.VartotojasRepository;
+import com.example.AutomobiliuSkelbimai.models.Car;
 import com.example.AutomobiliuSkelbimai.models.Vartotojas;
 import com.example.AutomobiliuSkelbimai.services.VartotojoService;
 import org.springframework.web.bind.annotation.*;
@@ -22,4 +23,10 @@ public class VartotojoController {
     public String getJwtToken(String email, String password) throws SQLException {
         return vartotojoService.getJwtToken(email, password);
     }
+    @CrossOrigin
+    @PostMapping("/modifyVartotojas")
+    public void modifyVartotojas(@RequestBody Vartotojas vartotojas) throws SQLException {
+        vartotojoService.modifyVartotojas(vartotojas);
+    }
+
 }

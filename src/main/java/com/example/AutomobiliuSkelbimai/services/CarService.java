@@ -17,6 +17,8 @@ public class CarService {
         carRepository.addCar(car);
     }
 
+
+
 public List<Car>getCarList() throws SQLException {
     List<Car> carList = carRepository.getCarList();
     return carList;
@@ -44,6 +46,9 @@ public List<Car>getCarList() throws SQLException {
     }
     public Car getCarById(int id) throws SQLException {
         return carRepository.getCarById(id);
+    }
+    public void deleteCarById(int id) throws SQLException {
+        carRepository.deleteCarById(id);
     }
 }
 

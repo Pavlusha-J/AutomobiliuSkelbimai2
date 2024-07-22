@@ -1,5 +1,4 @@
 package com.example.AutomobiliuSkelbimai.controller;
-
 import com.example.AutomobiliuSkelbimai.carsRepositories.CarRepository;
 import com.example.AutomobiliuSkelbimai.models.Car;
 import com.example.AutomobiliuSkelbimai.services.CarService;
@@ -43,7 +42,7 @@ public class CarController {
     }
     @CrossOrigin
     @PostMapping("/modifyCar")
-    public void modifyCAr(@RequestBody Car car) throws SQLException {
+    public void modifyCar(@RequestBody Car car) throws SQLException {
         carService.modifyCar(car);
     }
     @CrossOrigin
@@ -51,12 +50,9 @@ public class CarController {
     public Car getCarById(int id) throws SQLException {
         return carService.getCarById(id);
     }
+    @CrossOrigin
+    @PostMapping("/deleteCarById")
+    public void deleteCarById(int id) throws SQLException {
+        carService.deleteCarById(id);
+    }
 }
-
-
-
-
-
-
-
-

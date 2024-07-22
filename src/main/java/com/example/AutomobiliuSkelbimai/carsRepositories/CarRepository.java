@@ -25,17 +25,6 @@ public class CarRepository {
         ps.setBytes(8, bytes);
         ps.execute();
     }
-//public List<Klientas> getClientList() throws SQLException {
-//    List<Klientas> clientList = new ArrayList<>();
-//    PreparedStatement ps = Connect.SQLConnection("SELECT * FROM klientai");
-//    ResultSet rs = ps.executeQuery();
-//    while(rs.next()){
-//        Klientas k = new Klientas(rs.getInt("id"), rs.getString("vardas"), rs.getString("pavarde"),
-//                rs.getString("el_pastas"), rs.getLong("numeris"));
-//        clientList.add(k);
-//    }
-//    return clientList;
-
 
     public List<Car> getCarList() throws SQLException {
         List<Car> carList = new ArrayList<>();
@@ -72,14 +61,15 @@ public class CarRepository {
         return modelisList;
 
     }
+
     public List<Car> getSearchList(String marke, String modelis, double kainanuo, double kainaiki) throws SQLException {
         List<Car> kainosList = new ArrayList<>();
-        PreparedStatement ps = Connect.SQLConnection ("SELECT * FROM cars WHERE marke = ? AND modelis = ? " +
+        PreparedStatement ps = Connect.SQLConnection("SELECT * FROM cars WHERE marke = ? AND modelis = ? " +
                 "AND kaina < ? AND kaina > ?");
-        ps.setString(1, marke );
-        ps.setString(2, modelis );
-        ps.setDouble(3, kainaiki );
-        ps.setDouble(4, kainanuo );
+        ps.setString(1, marke);
+        ps.setString(2, modelis);
+        ps.setDouble(3, kainaiki);
+        ps.setDouble(4, kainanuo);
 
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
@@ -90,13 +80,16 @@ public class CarRepository {
             kainosList.add(car);
         }
         return kainosList;
+
+
     }
+
     public List<Car> getSearchListMarke(String marke, double kainaNuo, double kainaIki) throws SQLException {
         List<Car> kainosList = new ArrayList<>();
-        PreparedStatement ps = Connect.SQLConnection ("SELECT * FROM cars WHERE marke = ? AND kaina > ? AND kaina < ?");
-        ps.setString(1, marke );
-        ps.setDouble(2, kainaNuo );
-        ps.setDouble(3, kainaIki );
+        PreparedStatement ps = Connect.SQLConnection("SELECT * FROM cars WHERE marke = ? AND kaina > ? AND kaina < ?");
+        ps.setString(1, marke);
+        ps.setDouble(2, kainaNuo);
+        ps.setDouble(3, kainaIki);
 
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
@@ -108,11 +101,12 @@ public class CarRepository {
         }
         return kainosList;
     }
+
     public List<Car> getSearchListKaina(double kainaNuo, double kainaIki) throws SQLException {
         List<Car> kainosList = new ArrayList<>();
-        PreparedStatement ps = Connect.SQLConnection ("SELECT * FROM cars WHERE kaina > ? AND kaina < ?");
-        ps.setDouble(1, kainaNuo );
-        ps.setDouble(2, kainaIki );
+        PreparedStatement ps = Connect.SQLConnection("SELECT * FROM cars WHERE kaina > ? AND kaina < ?");
+        ps.setDouble(1, kainaNuo);
+        ps.setDouble(2, kainaIki);
 
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
@@ -124,6 +118,7 @@ public class CarRepository {
         }
         return kainosList;
     }
+
     public void modifyCar(Car car) throws SQLException {
         PreparedStatement ps = Connect.SQLConnection("UPDATE cars SET pavadinimas = ?, marke = ?, modelis = ?, metai = ?, kaina = ?, rida = ?, aprasymas = ?, nuotrauka = ? WHERE id = ?");
         ps.setString(1, car.getPavadinimas());
@@ -138,6 +133,7 @@ public class CarRepository {
         ps.execute();
 
     }
+
     public Car getCarById(int id) throws SQLException {
         Car car = null;
         PreparedStatement ps = Connect.SQLConnection("SELECT * FROM cars WHERE id = ?");
@@ -152,5 +148,9 @@ public class CarRepository {
         return car;
     }
 
-
+    public void deleteCarById(int id) throws SQLException {
+        PreparedStatement ps = Connect.SQLConnection("DELETE FROM cars WHERE id = ?");
+        ps.setInt(1,id);
+        ps.execute();
+    }
 }

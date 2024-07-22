@@ -1,6 +1,7 @@
 package com.example.AutomobiliuSkelbimai.services;
 
 import com.example.AutomobiliuSkelbimai.carsRepositories.VartotojasRepository;
+import com.example.AutomobiliuSkelbimai.models.Car;
 import com.example.AutomobiliuSkelbimai.models.Vartotojas;
 
 import java.sql.SQLException;
@@ -13,5 +14,8 @@ public class VartotojoService {
     }
     public String getJwtToken(String email, String password) throws SQLException {
         return vartotojasRepository.getJwtToken(email, password);
+    }
+    public void modifyVartotojas(Vartotojas vartotojas) throws SQLException {
+        vartotojasRepository.modifyVartotojas(vartotojas);
     }
 }
