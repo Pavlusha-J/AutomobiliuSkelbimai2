@@ -13,11 +13,14 @@ public class Car {
     private int rida;
     private String aprasymas;
     private byte[] nuotrauka;
+    private boolean dauztos;
 
     // konstruktorius
 
     public Car(int id, String pavadinimas, String marke, String modelis, int metai, double kaina, int rida,
-                String aprasymas, byte[] nuotrauka) {
+               String aprasymas, byte[] nuotrauka, boolean dauztos)
+
+    {
         this.id = id;
         this.pavadinimas = pavadinimas;
         this.marke = marke;
@@ -27,6 +30,8 @@ public class Car {
         this.rida = rida;
         this.aprasymas = aprasymas;
         this.nuotrauka = nuotrauka;
+        this.dauztos = dauztos;
+
     }
 
     public int getId() {
@@ -100,6 +105,15 @@ public class Car {
     public void setNuotrauka(byte[] nuotrauka) {
         this.nuotrauka = nuotrauka;
     }
+
+    public boolean isDauztos() {
+        return dauztos;
+    }
+
+    public void setDauztos(boolean dauztos) {
+        this.dauztos = dauztos;
+    }
+
     public Car() {
 
     }

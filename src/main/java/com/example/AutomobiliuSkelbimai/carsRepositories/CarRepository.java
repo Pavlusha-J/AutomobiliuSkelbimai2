@@ -13,7 +13,7 @@ public class CarRepository {
 
     public void addCar(Car car) throws SQLException {
         PreparedStatement ps = Connect.SQLConnection("INSERT INTO cars (pavadinimas, marke, modelis, metai, " +
-                "kaina, rida, aprasymas, nuotrauka) VALUES (?,?,?,?,?,?,?,?)");
+                "kaina, rida, aprasymas, nuotrauka, dauztos) VALUES (?,?,?,?,?,?,?,?,?)");
         ps.setString(1, car.getPavadinimas());
         ps.setString(2, car.getMarke());
         ps.setString(3, car.getModelis());
@@ -23,6 +23,7 @@ public class CarRepository {
         ps.setString(7, car.getAprasymas());
         byte[] bytes = car.getNuotrauka();
         ps.setBytes(8, bytes);
+        ps.setBoolean(9, car.isDauztos());
         ps.execute();
     }
 
@@ -34,7 +35,7 @@ public class CarRepository {
             Car car = new Car(rs.getInt("id"), rs.getString("pavadinimas"),
                     rs.getString("marke"), rs.getString("modelis"), rs.getInt("metai"),
                     rs.getDouble("kaina"), rs.getInt("rida"), rs.getString("aprasymas"),
-                    rs.getBytes("nuotrauka"));
+                    rs.getBytes("nuotrauka"),rs.getBoolean("dauztos") );
             carList.add(car);
         }
         return carList;
@@ -76,7 +77,7 @@ public class CarRepository {
             Car car = new Car(rs.getInt("id"), rs.getString("pavadinimas"),
                     rs.getString("marke"), rs.getString("modelis"), rs.getInt("metai"),
                     rs.getDouble("kaina"), rs.getInt("rida"), rs.getString("aprasymas"),
-                    rs.getBytes("nuotrauka"));
+                    rs.getBytes("nuotrauka"), rs.getBoolean("dauztos"));
             kainosList.add(car);
         }
         return kainosList;
@@ -96,7 +97,7 @@ public class CarRepository {
             Car car = new Car(rs.getInt("id"), rs.getString("pavadinimas"),
                     rs.getString("marke"), rs.getString("modelis"), rs.getInt("metai"),
                     rs.getDouble("kaina"), rs.getInt("rida"), rs.getString("aprasymas"),
-                    rs.getBytes("nuotrauka"));
+                    rs.getBytes("nuotrauka"), rs.getBoolean("dauztos"));
             kainosList.add(car);
         }
         return kainosList;
@@ -113,10 +114,43 @@ public class CarRepository {
             Car car = new Car(rs.getInt("id"), rs.getString("pavadinimas"),
                     rs.getString("marke"), rs.getString("modelis"), rs.getInt("metai"),
                     rs.getDouble("kaina"), rs.getInt("rida"), rs.getString("aprasymas"),
-                    rs.getBytes("nuotrauka"));
+                    rs.getBytes("nuotrauka"), rs.getBoolean("dauztos"));
             kainosList.add(car);
         }
         return kainosList;
+    }
+    public List<Car> getSearchListMetai(int metaiNuo, int metaiIki) throws SQLException {
+        List<Car> metaiList = new ArrayList<>();
+        PreparedStatement ps = Connect.SQLConnection("SELECT * FROM cars WHERE metai > ? AND metai < ?");
+        ps.setInt(1, metaiNuo);
+        ps.setInt(2, metaiIki);
+
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Car car = new Car(rs.getInt("id"), rs.getString("pavadinimas"),
+                    rs.getString("marke"), rs.getString("modelis"), rs.getInt("metai"),
+                    rs.getDouble("kaina"), rs.getInt("rida"), rs.getString("aprasymas"),
+                    rs.getBytes("nuotrauka"), rs.getBoolean("dauztos"));
+            metaiList.add(car);
+        }
+        return metaiList;
+    }
+
+    public List<Car> getSearchListRida(int ridaNuo, int ridaIki) throws SQLException {
+        List<Car>  ridaList = new ArrayList<>();
+        PreparedStatement ps = Connect.SQLConnection("SELECT * FROM cars WHERE rida > ? AND rida < ?");
+        ps.setInt(1, ridaNuo);
+        ps.setInt(2, ridaIki);
+
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Car car = new Car(rs.getInt("id"), rs.getString("pavadinimas"),
+                    rs.getString("marke"), rs.getString("modelis"), rs.getInt("metai"),
+                    rs.getDouble("kaina"), rs.getInt("rida"), rs.getString("aprasymas"),
+                    rs.getBytes("nuotrauka"), rs.getBoolean("dauztos"));
+            ridaList.add(car);
+        }
+        return ridaList;
     }
 
     public void modifyCar(Car car) throws SQLException {
@@ -143,7 +177,7 @@ public class CarRepository {
             car = new Car(rs.getInt("id"), rs.getString("pavadinimas"),
                     rs.getString("marke"), rs.getString("modelis"), rs.getInt("metai"),
                     rs.getDouble("kaina"), rs.getInt("rida"), rs.getString("aprasymas"),
-                    rs.getBytes("nuotrauka"));
+                    rs.getBytes("nuotrauka"), rs.getBoolean("dauztos"));
         }
         return car;
     }
@@ -153,4 +187,22 @@ public class CarRepository {
         ps.setInt(1,id);
         ps.execute();
     }
+
+    public List<Car> getCarListDauztos(boolean dauztos) throws SQLException {
+        List<Car> carListDauztos = new ArrayList<>();
+        PreparedStatement ps = Connect.SQLConnection("SELECT * FROM cars WHERE dauztos = ?");
+        ps.setBoolean(1, dauztos);
+        ps.execute();
+
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Car car = new Car(rs.getInt("id"), rs.getString("pavadinimas"),
+                    rs.getString("marke"), rs.getString("modelis"), rs.getInt("metai"),
+                    rs.getDouble("kaina"), rs.getInt("rida"), rs.getString("aprasymas"),
+                    rs.getBytes("nuotrauka"),rs.getBoolean("dauztos") );
+            carListDauztos.add(car);
+        }
+        return carListDauztos;
+    }
+
 }
