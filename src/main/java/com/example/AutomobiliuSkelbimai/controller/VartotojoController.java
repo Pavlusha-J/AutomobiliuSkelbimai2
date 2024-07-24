@@ -28,5 +28,10 @@ public class VartotojoController {
     public void modifyVartotojas(@RequestBody Vartotojas vartotojas) throws SQLException {
         vartotojoService.modifyVartotojas(vartotojas);
     }
+    @CrossOrigin
+    @GetMapping("/getVartotojas")
+    public Vartotojas getVartotojas(String token) throws SQLException {
+       return vartotojoService.getVartotojas(token);
+    }
 
 }

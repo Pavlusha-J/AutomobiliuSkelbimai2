@@ -33,34 +33,14 @@ public class CarService {
         return modelisList;
     }
 
-    public List<Car> getSearchList(String marke, String modelis, double kainaNuo, double kainaIki) throws SQLException {
+    public List<Car> getSearchList(String marke, String modelis, double kainaNuo, double kainaIki, int metaiNuo, int metaiIki, int ridaNuo, int ridaIki) throws SQLException {
         if (marke == "") {
-            return carRepository.getSearchListKaina(kainaNuo, kainaIki);
+            return carRepository.getSearchListKaina(kainaNuo, kainaIki, metaiNuo, metaiIki, ridaNuo, ridaIki);
         }
         if (modelis == "") {
-            return carRepository.getSearchListMarke(marke, kainaNuo, kainaIki);
+            return carRepository.getSearchListMarke(marke, kainaNuo, kainaIki, metaiNuo, metaiIki, ridaNuo, ridaIki);
         }
-        return carRepository.getSearchList(marke, modelis, kainaNuo, kainaIki);
-    }
-
-    public List<Car> getSearchList1(String marke, String modelis, int ridaNuo, int ridaIki) throws SQLException {
-        if (marke == "") {
-            return carRepository.getSearchListRida(ridaNuo, ridaIki);
-        }
-        if (modelis == "") {
-            return carRepository.getSearchListMarke(marke, ridaNuo, ridaIki);
-        }
-        return carRepository.getSearchList(marke, modelis, ridaNuo, ridaIki);
-    }
-
-    public List<Car> getSearchList2(String marke, String modelis, int metaiNuo, int metaiIki) throws SQLException {
-        if (marke == "") {
-            return carRepository.getSearchListMetai(metaiNuo, metaiIki);
-        }
-        if (modelis == "") {
-            return carRepository.getSearchListMarke(marke, metaiNuo, metaiIki);
-        }
-        return carRepository.getSearchList(marke, modelis, metaiNuo, metaiIki);
+        return carRepository.getSearchList(marke, modelis, kainaNuo, kainaIki, metaiNuo, metaiIki, ridaNuo, ridaIki);
     }
 
     public void modifyCar(Car car) throws SQLException {

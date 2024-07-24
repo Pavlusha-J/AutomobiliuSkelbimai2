@@ -63,14 +63,17 @@ public class CarRepository {
 
     }
 
-    public List<Car> getSearchList(String marke, String modelis, double kainanuo, double kainaiki) throws SQLException {
+    public List<Car> getSearchList(String marke, String modelis, double kainanuo, double kainaiki, int metaiNuo, int metaiIki, int ridaNuo, int ridaIki) throws SQLException {
         List<Car> kainosList = new ArrayList<>();
-        PreparedStatement ps = Connect.SQLConnection("SELECT * FROM cars WHERE marke = ? AND modelis = ? " +
-                "AND kaina < ? AND kaina > ?");
+        PreparedStatement ps = Connect.SQLConnection("SELECT * FROM cars WHERE marke = ? AND modelis = ? AND kaina >= ? AND kaina <= ? AND metai >= ? AND metai <= ? AND rida >= ? AND rida <= ?");
         ps.setString(1, marke);
         ps.setString(2, modelis);
-        ps.setDouble(3, kainaiki);
-        ps.setDouble(4, kainanuo);
+        ps.setDouble(4, kainaiki);
+        ps.setDouble(3, kainanuo);
+        ps.setInt(5,metaiNuo);
+        ps.setInt(6,metaiIki);
+        ps.setInt(7, ridaNuo);
+        ps.setInt(8, ridaIki);
 
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
@@ -85,12 +88,16 @@ public class CarRepository {
 
     }
 
-    public List<Car> getSearchListMarke(String marke, double kainaNuo, double kainaIki) throws SQLException {
+    public List<Car> getSearchListMarke(String marke, double kainaNuo, double kainaIki, int metaiNuo, int metaiIki, int ridaNuo, int ridaIki) throws SQLException {
         List<Car> kainosList = new ArrayList<>();
-        PreparedStatement ps = Connect.SQLConnection("SELECT * FROM cars WHERE marke = ? AND kaina > ? AND kaina < ?");
+        PreparedStatement ps = Connect.SQLConnection("SELECT * FROM cars WHERE marke = ? AND kaina >= ? AND kaina <= ? AND metai >= ? AND metai <= ? AND rida >= ? AND rida <= ?");
         ps.setString(1, marke);
         ps.setDouble(2, kainaNuo);
         ps.setDouble(3, kainaIki);
+        ps.setInt(4,metaiNuo);
+        ps.setInt(5,metaiIki);
+        ps.setInt(6, ridaNuo);
+        ps.setInt(7, ridaIki);
 
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
@@ -103,11 +110,15 @@ public class CarRepository {
         return kainosList;
     }
 
-    public List<Car> getSearchListKaina(double kainaNuo, double kainaIki) throws SQLException {
+    public List<Car> getSearchListKaina(double kainaNuo, double kainaIki, int metaiNuo, int metaiIki, int ridaNuo, int ridaIki) throws SQLException {
         List<Car> kainosList = new ArrayList<>();
-        PreparedStatement ps = Connect.SQLConnection("SELECT * FROM cars WHERE kaina > ? AND kaina < ?");
+        PreparedStatement ps = Connect.SQLConnection("SELECT * FROM cars WHERE kaina >= ? AND kaina <= ? AND metai >= ? AND metai <= ? AND rida >= ? AND rida <= ?");
         ps.setDouble(1, kainaNuo);
         ps.setDouble(2, kainaIki);
+        ps.setInt(3,metaiNuo);
+        ps.setInt(4,metaiIki);
+        ps.setInt(5, ridaNuo);
+        ps.setInt(6, ridaIki);
 
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
@@ -119,23 +130,6 @@ public class CarRepository {
         }
         return kainosList;
     }
-    public List<Car> getSearchListMetai(int metaiNuo, int metaiIki) throws SQLException {
-        List<Car> metaiList = new ArrayList<>();
-        PreparedStatement ps = Connect.SQLConnection("SELECT * FROM cars WHERE metai > ? AND metai < ?");
-        ps.setInt(1, metaiNuo);
-        ps.setInt(2, metaiIki);
-
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            Car car = new Car(rs.getInt("id"), rs.getString("pavadinimas"),
-                    rs.getString("marke"), rs.getString("modelis"), rs.getInt("metai"),
-                    rs.getDouble("kaina"), rs.getInt("rida"), rs.getString("aprasymas"),
-                    rs.getBytes("nuotrauka"), rs.getBoolean("dauztos"));
-            metaiList.add(car);
-        }
-        return metaiList;
-    }
-
     public List<Car> getSearchListRida(int ridaNuo, int ridaIki) throws SQLException {
         List<Car>  ridaList = new ArrayList<>();
         PreparedStatement ps = Connect.SQLConnection("SELECT * FROM cars WHERE rida > ? AND rida < ?");

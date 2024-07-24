@@ -6,9 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Connect {
-    private static final String URL = "jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7721446";
-    private static final String USERNAME = "sql7721446";
-    private static final String PASSWORD = "wPDqPdnUqK";
+    private static final String URL = "jdbc:mysql://localhost:3306/auto_skelbimu_portalas";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "root";
 
     private static Connection connection;
 

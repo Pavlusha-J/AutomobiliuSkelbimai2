@@ -37,19 +37,8 @@ public class CarController {
     }
     @CrossOrigin
     @GetMapping("/paieska")
-    public List<Car> getSearchList(String marke, String modelis, double kainaNuo, double kainaIki) throws SQLException {
-        return carService.getSearchList(marke, modelis, kainaNuo, kainaIki);
-    }
-        @CrossOrigin
-        @GetMapping("/paieska1")
-        public List<Car> getSearchList1(String marke, String modelis, int ridaNuo, int ridaIki) throws SQLException {
-            return carService.getSearchList1(marke, modelis, ridaNuo, ridaIki);
-        }
-    @CrossOrigin
-    @GetMapping("/paieska2")
-    public List<Car> getSearchList2(String marke, String modelis, int metaiNuo, int metaiIki) throws SQLException {
-        return carService.getSearchList2(marke, modelis, metaiNuo, metaiIki);
-
+    public List<Car> getSearchList(String marke, String modelis, double kainaNuo, double kainaIki, int metaiNuo, int metaiIki, int ridaNuo, int ridaIki) throws SQLException {
+        return carService.getSearchList(marke, modelis, kainaNuo, kainaIki, metaiNuo, metaiIki, ridaNuo, ridaIki);
     }
     @CrossOrigin
     @PostMapping("/modifyCar")
@@ -65,13 +54,8 @@ public class CarController {
     @PostMapping("/deleteCarById")
     public void deleteCarById(int id) throws SQLException {
         carService.deleteCarById(id);
-            }
-    @CrossOrigin
-    @GetMapping("/getCarDauztos")
-    public List<Car>getCarListDauztos() throws SQLException {
-        List<Car> carListDauztos = carService.getCarListDauztos(true);
-        return carListDauztos;
     }
+
 
 }
 

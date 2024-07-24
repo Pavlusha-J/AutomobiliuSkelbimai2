@@ -35,11 +35,23 @@ public class VartotojasRepository {
     }
 
     public void modifyVartotojas(Vartotojas vartotojas) throws SQLException {
-        PreparedStatement ps = Connect.SQLConnection("UPDATE users SET name= ?, email = ?, password = ? WHERE id = ?");
+        PreparedStatement ps = Connect.SQLConnection("UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?");
         ps.setString(1, vartotojas.getName());
         ps.setString(2, vartotojas.getEmail());
         ps.setString(3, vartotojas.getPassword());
         ps.setInt(4, vartotojas.getId());
         ps.execute();
+    }
+    public Vartotojas getVartotojas(int id) throws SQLException {
+        Vartotojas vartotojas = new Vartotojas();
+        PreparedStatement ps = Connect.SQLConnection("SELECT * FROM users WHERE id = ? LIMIT 1");
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){
+            vartotojas = new Vartotojas(rs.getInt("id"), rs.getString("name"), rs.getString("email"));
+            return vartotojas;
+        }
+        return vartotojas;
+
     }
 }
